@@ -3,6 +3,7 @@ export const BIRTHDAY_CONFIG = {
   birthMonth: 8,
   birthDate: 29,
   birthYear: 2000,
+  targetYear: 2026,
 };
 
 export const PHOTOS = [
@@ -22,10 +23,12 @@ export const PHOTOS = [
 export const SHYARI = {
   title: 'For You, Priya',
   lines: [
-    'Teri muskurahat mein chhupa hai ek jahan,',
-    'Har pal tera saath hai meri pehchaan.',
-    '29 August jab aata hai kareeb,',
-    'Dil kehta hai — tu meri sabse khoobsurat taareekh.',
+    'পাঁচটি দিন বাকি শুধু, খুশির বার্তা আসে,',
+    'পিহুর জন্মদিন এলো, রঙিন ভালোবাসায়।',
+    'নতুন অতিথি আমি, তোমার মনের ঘরে,',
+    'বাকি পথটুকু চলব, তোমার হাত ধরে।',
+    'জন্মদিন আসুক নিয়ে, এক নতুন প্রভাত,',
+    'সারাজীবন পাশে থেকে, দিও তোমার হাত!',
   ],
 };
 

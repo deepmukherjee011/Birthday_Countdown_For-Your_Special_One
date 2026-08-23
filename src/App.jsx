@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Starfield from './components/Starfield';
 import CountdownTimer from './components/CountdownTimer';
 import Celebration from './components/Celebration';
@@ -13,6 +13,10 @@ function App() {
   const { config, photos, shyari, song, loading, error, refetch } = useFirebaseData();
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
+  const handleCelebrate = useCallback(() => setIsCelebrating(true), []);
+  const celebrationAge = config.targetYear
+    ? config.targetYear - config.birthYear
+    : new Date().getFullYear() - config.birthYear;
 
   if (loading) {
     return (
@@ -37,7 +41,7 @@ function App() {
         {isCelebrating ? (
           <Celebration
             name={config.name}
-            age={new Date().getFullYear() - config.birthYear}
+            age={celebrationAge}
           />
         ) : (
           <CountdownTimer
@@ -45,7 +49,8 @@ function App() {
             birthMonth={config.birthMonth}
             birthDate={config.birthDate}
             birthYear={config.birthYear}
-            onCelebrate={() => setIsCelebrating(true)}
+            targetYear={config.targetYear}
+            onCelebrate={handleCelebrate}
           />
         )}
 

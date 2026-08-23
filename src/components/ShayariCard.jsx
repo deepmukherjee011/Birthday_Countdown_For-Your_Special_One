@@ -6,7 +6,7 @@ const ShayariCard = ({ title, lines }) => {
       {title && (
         <p className="shayari-title font-display text-glow">{title}</p>
       )}
-      <div className="shayari-lines font-handwritten">
+      <div className="shayari-lines">
         {lines.map((line, index) => (
           <p key={index}>{line}</p>
         ))}
