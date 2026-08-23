@@ -1,100 +1,89 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
-const AudioPlayer = ({ songs }) => {
+const AudioPlayer = ({ song, autoplay = true }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [needsInteraction, setNeedsInteraction] = useState(false);
   const audioRef = useRef(null);
 
-  const currentSong = songs && songs.length > 0 ? songs[currentSongIndex] : null;
+  const playAudio = useCallback(async () => {
+    if (!audioRef.current || !song?.src) return false;
+
+    try {
+      await audioRef.current.play();
+      setIsPlaying(true);
+      setNeedsInteraction(false);
+      return true;
+    } catch (error) {
+      console.warn('Autoplay blocked, waiting for interaction:', error);
+      setNeedsInteraction(true);
+      return false;
+    }
+  }, [song?.src]);
 
   useEffect(() => {
-    // If the song changes while playing, try to autoplay the next one
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play().catch(e => console.error("Audio play failed:", e));
-    }
-  }, [currentSongIndex]);
+    if (!autoplay || !song?.src) return;
+    playAudio();
+  }, [autoplay, song?.src, playAudio]);
 
   const togglePlay = () => {
-    if (!currentSong) return;
-    
+    if (!song?.src) return;
+
     if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(e => console.error("Audio play failed:", e));
+      audioRef.current?.pause();
+      setIsPlaying(false);
+      return;
     }
-    setIsPlaying(!isPlaying);
+
+    playAudio();
   };
 
-  const handleNextSong = () => {
-    if (!songs || songs.length <= 1) return;
-    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+  const handleStart = () => {
+    playAudio();
   };
 
-  if (!currentSong) return null;
+  if (!song?.src) return null;
 
   return (
-    <div style={{
-      background: 'rgba(255, 255, 255, 0.1)',
-      backdropFilter: 'blur(10px)',
-      padding: '0.75rem 1.5rem',
-      borderRadius: '50px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      margin: '2rem auto 0',
-      width: 'fit-content',
-      border: '1px solid rgba(255,255,255,0.2)'
-    }}>
-      <button 
-        onClick={togglePlay}
-        style={{
-          background: 'var(--glow-color)',
-          color: 'var(--bg-color)',
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 0,
-          border: 'none',
-          cursor: 'pointer'
-        }}
-      >
-        {isPlaying ? '⏸' : '▶'}
-      </button>
-      
-      {songs.length > 1 && (
-        <button 
-          onClick={handleNextSong}
-          style={{
-            background: 'transparent',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '0 5px',
-            fontSize: '1.2rem',
-            opacity: 0.8
-          }}
+    <>
+      {needsInteraction && (
+        <button
+          type="button"
+          className="music-start-overlay"
+          onClick={handleStart}
+          aria-label="Start music"
         >
-          ⏭
+          <span className="music-start-icon">🎵</span>
+          <span className="font-display">Tap to begin your surprise</span>
         </button>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>{currentSong.caption || 'Our Song'}</span>
-        <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
-          {songs.length > 1 ? `Track ${currentSongIndex + 1} of ${songs.length}` : 'Tap to play'}
-        </span>
-      </div>
+      <div className="audio-player">
+        <button
+          type="button"
+          onClick={togglePlay}
+          className="audio-play-btn"
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
+        >
+          {isPlaying ? '⏸' : '▶'}
+        </button>
 
-      <audio 
-        ref={audioRef} 
-        src={currentSong.url} 
-        onEnded={handleNextSong}
-        style={{ display: 'none' }} 
-      />
-    </div>
+        <div className="audio-meta">
+          <span className="audio-title">{song.title || 'Our Song'}</span>
+          <span className="audio-subtitle">
+            {isPlaying ? 'Now playing for you' : song.subtitle || 'Tap to play'}
+          </span>
+        </div>
+
+        <audio
+          ref={audioRef}
+          src={song.src}
+          loop
+          preload="auto"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+      </div>
+    </>
   );
 };
 
