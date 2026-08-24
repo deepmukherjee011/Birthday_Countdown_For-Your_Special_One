@@ -30,11 +30,14 @@ const CountdownTimer = ({
   const targetLabel = `${birthDate} ${MONTH_NAMES[birthMonth - 1]} ${targetBirthday.getFullYear()}`;
 
   useEffect(() => {
+    let celebrated = false;
     const calculateTimeLeft = () => {
       const now = Date.now();
       const difference = targetBirthday.getTime() - now;
 
-      if (difference <= 0 && difference > -86400000) {
+      // Trigger celebration at the moment countdown reaches zero (within 1s)
+      if (!celebrated && Math.abs(difference) < 1000) {
+        celebrated = true;
         onCelebrate();
         return;
       }

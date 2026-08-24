@@ -13,14 +13,19 @@ export const BACKGROUND = {
 
 export const PHOTOS = [
   {
-    src: '/photos/birthday-celebration.png',
+    src: '/photos/pihu-1.jpg',
     caption: 'That smile on your birthday ✨',
     rotate: -3,
   },
   {
-    src: '/photos/our-memory.png',
+    src: '/photos/pihu-2.jpg',
     caption: 'Us, always 💫',
     rotate: 2,
+  },
+  {
+    src: '/photos/pihu-3.jpg',
+    caption: 'Little moments together',
+    rotate: 1,
   },
 ];
 
@@ -38,10 +43,16 @@ export const SHYARI = {
 };
 
 export const SONG = {
-  src: '/music/our-song.mp3',
-  title: 'Our Song',
-  subtitle: 'Playing just for you',
+  // Default song used for "today" and general playback. Replace the file
+  // in `/public/music/` with the new song named `todays-song.mp3`.
+  src: '/music/todays-song.mp3',
+  title: 'Today\'s Song',
+  subtitle: 'A special song for today',
 };
+
+// Keep a reference to the previous song (moved to Day 5). The file should
+// exist at /public/music/day-5-song.mp3 (rename the previous file accordingly).
+export const PREVIOUS_SONG_SRC = '/music/day-5-song.mp3';
 
 export const DAILY_SURPRISES = [
   {
@@ -76,10 +87,11 @@ export const DAILY_SURPRISES = [
         'তুমি থাকো আমার প্রতিটি প্রার্থনায় ফিরে।',
       ],
     },
+    // Use the new todays-song.mp3 for this day (and for any "today" display)
     song: {
-      ...SONG,
-      title: 'Daily Surprise',
-      subtitle: 'Swap this MP3 when you add tomorrow’s song',
+      src: SONG.src,
+      title: SONG.title,
+      subtitle: SONG.subtitle,
     },
   },
   {
@@ -133,10 +145,11 @@ export const DAILY_SURPRISES = [
         'ভালোবাসা লিখবো আকাশ ভরে অবিরাম।',
       ],
     },
+    // Move the previous default song to Day 5 with a consistent filename.
     song: {
-      ...SONG,
-      title: 'Daily Surprise',
-      subtitle: 'The last song before birthday morning',
+      src: PREVIOUS_SONG_SRC,
+      title: 'Day 5 Song',
+      subtitle: 'A special track for Day 5',
     },
   },
   {
@@ -146,10 +159,12 @@ export const DAILY_SURPRISES = [
     shyari: {
       title: 'Happy Birthday',
       lines: [
-        'আজ তোমার দিন, আলোয় ভরা সকাল,',
-        'তোমার হাসিতে মুছে যাক সব জঞ্জাল।',
-        'জন্মদিনে চাই শুধু এই আশীর্বাদ,',
-        'আমার পাশে থেকো তুমি সারাজীবন অবিরাম।',
+        'আর মাত্র চার দিন বাকি, খুশির জোয়ারে ভাসে দিন,',
+        'পিহুর হাসিতে আজ, রঙিন হলো সব অমলিন।',
+        'নাচো তবে তালে তালে, আনন্দ আজ সবার মনে,',
+        'নতুন অতিথি আমি, তোমার মনেরই গহীনে।',
+        'ভালোবাসার এই গানেতে, কাটুক সুখের খেলা,',
+        'অগ্রিম শুভ জন্মদিন তোমায়, ওগো পিহু প্রিয়া!',
       ],
     },
     song: {

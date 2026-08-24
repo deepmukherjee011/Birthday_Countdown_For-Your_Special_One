@@ -351,3 +351,35 @@ input:focus, textarea:focus {
     overflow-wrap: anywhere;
   }
 }
+
+/* Mini-game styles */
+.mini-game-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,8,20,0.9), rgba(21,15,46,0.95));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 2rem;
+}
+.mini-game-card {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(240,180,41,0.12);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+}
+.mini-title { font-size: 1.4rem; margin-bottom: 0.75rem; }
+.mini-shayari-line { font-family: var(--font-bengali); font-size: 1.15rem; margin-bottom: 0.25rem; }
+.mini-shayari-line.small { opacity: 0.9; font-size: 0.95rem; }
+.bubble-area { display:flex; gap:1rem; justify-content:center; margin:1rem 0 0.5rem; }
+.mini-bubble { background: rgba(255,255,255,0.06); border-radius:50%; width:78px; height:78px; border:none; font-size:1.6rem; display:flex; align-items:center; justify-content:center; position:relative; cursor:pointer; }
+.mini-bubble .bubble-label { position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:0.8rem; color:rgba(255,255,255,0.9); }
+.mini-instruction { color: rgba(255,255,255,0.8); margin-top:0.85rem; }
+.mini-finish { margin-top:1rem; }
+.mini-finish-text { font-size:1.1rem; margin-bottom:0.5rem; }
+.mini-finish-btn { background: var(--glow-color); color: var(--bg-color); padding:0.6rem 1.2rem; border-radius:8px; }
+

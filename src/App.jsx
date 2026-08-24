@@ -6,6 +6,7 @@ import PhotoGallery from './components/PhotoGallery';
 import ShayariCard from './components/ShayariCard';
 import AudioPlayer from './components/AudioPlayer';
 import AdminPanel from './components/AdminPanel';
+import MiniGame from './components/MiniGame';
 import { useFirebaseData } from './hooks/useFirebaseData';
 import './index.css';
 
@@ -13,6 +14,7 @@ function App() {
   const { config, photos, shyari, song, background, loading, error, refetch } = useFirebaseData();
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
+  const [showMiniGame, setShowMiniGame] = useState(true);
   const handleCelebrate = useCallback(() => setIsCelebrating(true), []);
   const celebrationAge = config.targetYear
     ? config.targetYear - config.birthYear
@@ -42,32 +44,39 @@ function App() {
     <>
       <div className="site-background" style={backgroundStyle} aria-hidden="true" />
       <Starfield />
+      {showMiniGame ? (
+        <MiniGame
+          shyari={shyari}
+          song={song}
+          onFinish={() => setShowMiniGame(false)}
+        />
+      ) : (
+        <div className="container">
+          {error && (
+            <div className="app-error">{error}</div>
+          )}
 
-      <div className="container">
-        {error && (
-          <div className="app-error">{error}</div>
-        )}
+          {isCelebrating ? (
+            <Celebration
+              name={config.name}
+              age={celebrationAge}
+            />
+          ) : (
+            <CountdownTimer
+              name={config.name}
+              birthMonth={config.birthMonth}
+              birthDate={config.birthDate}
+              birthYear={config.birthYear}
+              targetYear={config.targetYear}
+              onCelebrate={handleCelebrate}
+            />
+          )}
 
-        {isCelebrating ? (
-          <Celebration
-            name={config.name}
-            age={celebrationAge}
-          />
-        ) : (
-          <CountdownTimer
-            name={config.name}
-            birthMonth={config.birthMonth}
-            birthDate={config.birthDate}
-            birthYear={config.birthYear}
-            targetYear={config.targetYear}
-            onCelebrate={handleCelebrate}
-          />
-        )}
-
-        <ShayariCard title={shyari.title} lines={shyari.lines} />
-        <PhotoGallery photos={photos} />
-        <AudioPlayer song={song} autoplay />
-      </div>
+          <ShayariCard title={shyari.title} lines={shyari.lines} />
+          <PhotoGallery photos={photos} />
+          <AudioPlayer song={song} autoplay />
+        </div>
+      )}
 
       <button
         type="button"
