@@ -23,7 +23,7 @@ export const PHOTOS = [
     rotate: 2,
   },
   {
-    src: '/photos/pihu-3.jpeg',
+    src: '/photos/pihu-3.png',
     caption: 'Little moments together',
     rotate: 1,
   },
