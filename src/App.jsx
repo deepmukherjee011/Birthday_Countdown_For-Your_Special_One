@@ -10,27 +10,37 @@ import { useFirebaseData } from './hooks/useFirebaseData';
 import './index.css';
 
 function App() {
-  const { config, photos, shyari, song, loading, error, refetch } = useFirebaseData();
+  const { config, photos, shyari, song, background, loading, error, refetch } = useFirebaseData();
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
   const handleCelebrate = useCallback(() => setIsCelebrating(true), []);
   const celebrationAge = config.targetYear
     ? config.targetYear - config.birthYear
     : new Date().getFullYear() - config.birthYear;
+  const backgroundStyle = background?.src
+    ? {
+        backgroundImage: `linear-gradient(180deg, rgba(5, 8, 20, 0.62) 0%, rgba(21, 15, 46, 0.72) 48%, rgba(5, 8, 20, 0.88) 100%), url("${background.src}")`,
+        backgroundPosition: background.position || 'center bottom',
+      }
+    : undefined;
 
   if (loading) {
     return (
-      <div className="container loading-screen">
+      <>
+        <div className="site-background" style={backgroundStyle} aria-hidden="true" />
         <Starfield />
-        <p className="animate-flicker text-glow font-display loading-text">
-          Loading your surprise...
-        </p>
-      </div>
+        <div className="container loading-screen">
+          <p className="animate-flicker text-glow font-display loading-text">
+            Loading your surprise...
+          </p>
+        </div>
+      </>
     );
   }
 
   return (
     <>
+      <div className="site-background" style={backgroundStyle} aria-hidden="true" />
       <Starfield />
 
       <div className="container">
@@ -54,8 +64,8 @@ function App() {
           />
         )}
 
-        <PhotoGallery photos={photos} />
         <ShayariCard title={shyari.title} lines={shyari.lines} />
+        <PhotoGallery photos={photos} />
         <AudioPlayer song={song} autoplay />
       </div>
 

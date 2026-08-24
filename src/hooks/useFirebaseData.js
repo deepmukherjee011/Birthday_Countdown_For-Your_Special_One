@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { BIRTHDAY_CONFIG, PHOTOS, SHYARI, SONG } from '../config/content';
+import { getDailyContent, getLocalDateKey } from '../config/content';
 
 export const useFirebaseData = () => {
-  const [song, setSong] = useState(SONG);
+  const [minuteTick, setMinuteTick] = useState(() => Date.now());
+  const tickDate = useMemo(() => new Date(minuteTick), [minuteTick]);
+  const todayKey = useMemo(() => getLocalDateKey(tickDate), [tickDate]);
+  const localContent = useMemo(() => getDailyContent(tickDate), [tickDate]);
+  const [song, setSong] = useState(localContent.song);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -37,8 +41,8 @@ export const useFirebaseData = () => {
           const selectedSong = fetchedSongs[0];
           setSong({
             src: selectedSong.url,
-            title: selectedSong.caption || SONG.title,
-            subtitle: SONG.subtitle,
+            title: selectedSong.caption || localContent.song.title,
+            subtitle: localContent.song.subtitle,
           });
         }
       };
@@ -55,14 +59,26 @@ export const useFirebaseData = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    setSong(localContent.song);
+  }, [localContent.song]);
+
+  useEffect(() => {
+    const refreshDate = () => setMinuteTick(Date.now());
+    const timer = setInterval(refreshDate, 60000);
+    return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [todayKey]);
+
   return {
-    config: BIRTHDAY_CONFIG,
-    photos: PHOTOS,
-    shyari: SHYARI,
+    config: localContent.config,
+    photos: localContent.photos,
+    shyari: localContent.shyari,
     song,
+    background: localContent.background,
+    surpriseDate: localContent.surpriseDate,
     loading,
     error,
     refetch: fetchData,
