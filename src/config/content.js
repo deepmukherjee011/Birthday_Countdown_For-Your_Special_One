@@ -13,17 +13,17 @@ export const BACKGROUND = {
 
 export const PHOTOS = [
   {
-    src: '/photos/pihu-1.jpg',
+    src: '/photos/pihu-1.png',
     caption: 'That smile on your birthday ✨',
     rotate: -3,
   },
   {
-    src: '/photos/pihu-2.jpg',
+    src: '/photos/pihu-2.png',
     caption: 'Us, always 💫',
     rotate: 2,
   },
   {
-    src: '/photos/pihu-3.jpg',
+    src: '/photos/pihu-3.jpeg',
     caption: 'Little moments together',
     rotate: 1,
   },
