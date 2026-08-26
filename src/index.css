@@ -383,3 +383,18 @@ input:focus, textarea:focus {
 .mini-finish-text { font-size:1.1rem; margin-bottom:0.5rem; }
 .mini-finish-btn { background: var(--glow-color); color: var(--bg-color); padding:0.6rem 1.2rem; border-radius:8px; }
 
+/* Targets + confetti */
+.target-arena { position: relative; width: 100%; height: 220px; margin-top: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius: 12px; overflow: hidden; }
+.target { position: absolute; transform: translate(-50%,-50%); border: none; background: rgba(255,255,255,0.06); width: 56px; height: 56px; border-radius: 50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.3rem; transition: transform 0.12s ease, box-shadow 0.12s; }
+.target.hit { transform: translate(-50%,-50%) scale(0.8); box-shadow: 0 6px 18px rgba(0,0,0,0.35); opacity:0.6; }
+.confetti-root { position: absolute; inset: 0; pointer-events: none; }
+.confetti-piece { position: absolute; width: 10px; height: 18px; opacity: 0.9; transform-origin: center; animation: confetti-fall 1.4s linear forwards; }
+.confetti-piece.p-0 { background: var(--glow-color); left: 10%; animation-delay: 0.02s }
+.confetti-piece.p-1 { background: var(--coral-color); left: 22%; animation-delay: 0.06s }
+.confetti-piece.p-2 { background: #7ee3c7; left: 34%; animation-delay: 0.09s }
+.confetti-piece.p-3 { background: #ffd166; left: 48%; animation-delay: 0.12s }
+.confetti-piece.p-4 { background: #a78bfa; left: 66%; animation-delay: 0.18s }
+.confetti-piece.p-5 { background: #ff7ab6; left: 82%; animation-delay: 0.22s }
+
+@keyframes confetti-fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity:1 } 100% { transform: translateY(110vh) rotate(360deg); opacity:0 } }
+
