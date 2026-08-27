@@ -13,19 +13,34 @@ export const BACKGROUND = {
 
 export const PHOTOS = [
   {
-    src: '/photos/pihu-4.jpeg',
+    src: '/photos/pihu-1.jpeg',
     caption: 'That smile on your birthday ✨',
     rotate: -3,
   },
   {
-    src: '/photos/pihu-5.jpeg',
+    src: '/photos/pihu-2.jpeg',
     caption: 'Us, always 💫',
     rotate: 2,
   },
   {
-    src: '/photos/pihu-6.jpeg',
+    src: '/photos/pihu-3.jpeg',
     caption: 'Little moments together',
     rotate: 1,
+  },
+  {
+    src: '/photos/pihu-4.jpeg',
+    caption: 'New memory 1',
+    rotate: -2,
+  },
+  {
+    src: '/photos/pihu-5.jpeg',
+    caption: 'New memory 2',
+    rotate: 3,
+  },
+  {
+    src: '/photos/pihu-6.jpeg',
+    caption: 'New memory 3',
+    rotate: 0,
   },
 ];
 
@@ -159,12 +174,10 @@ export const DAILY_SURPRISES = [
     shyari: {
       title: 'Happy Birthday',
       lines: [
-        'আর মাত্র চার দিন বাকি, খুশির জোয়ারে ভাসে দিন,',
-        'পিহুর হাসিতে আজ, রঙিন হলো সব অমলিন।',
         'নাচো তবে তালে তালে, আনন্দ আজ সবার মনে,',
         'নতুন অতিথি আমি, তোমার মনেরই গহীনে।',
         'ভালোবাসার এই গানেতে, কাটুক সুখের খেলা,',
-        'অগ্রিম শুভ জন্মদিন তোমায়, ওগো পিহু প্রিয়া!',
+        'শুভ জন্মদিন তোমায়, ওগো পিহু প্রিয়া!',
       ],
     },
     song: {
