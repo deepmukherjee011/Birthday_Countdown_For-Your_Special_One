@@ -29,17 +29,17 @@ export const PHOTOS = [
   },
   {
     src: '/photos/pihu-4.jpeg',
-    caption: 'New memory 1',
+    caption: 'Us',
     rotate: -2,
   },
   {
     src: '/photos/pihu-5.jpeg',
-    caption: 'New memory 2',
+    caption: 'Tela',
     rotate: 3,
   },
   {
     src: '/photos/pihu-6.jpeg',
-    caption: 'New memory 3',
+    caption: 'Jhagiaa',
     rotate: 0,
   },
 ];
