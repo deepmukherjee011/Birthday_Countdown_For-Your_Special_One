@@ -48,6 +48,7 @@ function App() {
         <MiniGame
           shyari={shyari}
           song={song}
+          photos={photos}
           onFinish={() => setShowMiniGame(false)}
         />
       ) : (
