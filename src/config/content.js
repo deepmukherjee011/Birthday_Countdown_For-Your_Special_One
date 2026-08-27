@@ -263,3 +263,6 @@ export const getDailyContent = (date = new Date()) => {
     surpriseDate: fallbackSurprise?.date ?? todayKey,
   };
 };
+
+// Timestamp for when today's photos were last confirmed/overwritten
+export const PHOTOS_UPDATED_AT = '2026-08-27T00:00:00Z';
