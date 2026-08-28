@@ -7,11 +7,12 @@ import ShayariCard from './components/ShayariCard';
 import AudioPlayer from './components/AudioPlayer';
 import AdminPanel from './components/AdminPanel';
 import MiniGame from './components/BalloonMessages';
+import HappyBirthdayGame from './components/HappyBirthdayGame';
 import { useFirebaseData } from './hooks/useFirebaseData';
 import './index.css';
 
 function App() {
-  const { config, photos, shyari, song, background, loading, error, refetch } = useFirebaseData();
+  const { config, photos, shyari, song, background, loading, error, refetch, surpriseDate } = useFirebaseData();
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
   const [showMiniGame, setShowMiniGame] = useState(true);
@@ -45,12 +46,21 @@ function App() {
       <div className="site-background" style={backgroundStyle} aria-hidden="true" />
       <Starfield />
       {showMiniGame ? (
-        <MiniGame
-          shyari={shyari}
-          song={song}
-          photos={photos}
-          onFinish={() => setShowMiniGame(false)}
-        />
+        surpriseDate === '2026-08-29' ? (
+          <HappyBirthdayGame
+            shyari={shyari}
+            song={song}
+            photos={photos}
+            onFinish={() => setShowMiniGame(false)}
+          />
+        ) : (
+          <MiniGame
+            shyari={shyari}
+            song={song}
+            photos={photos}
+            onFinish={() => setShowMiniGame(false)}
+          />
+        )
       ) : (
         <div className="container">
           {error && (
