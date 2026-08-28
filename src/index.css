@@ -398,6 +398,13 @@ input:focus, textarea:focus {
 
 @keyframes confetti-fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity:1 } 100% { transform: translateY(110vh) rotate(360deg); opacity:0 } }
 
+/* Balloon game styles */
+.balloon-arena { position: relative; width: 100%; height: 260px; margin-top: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius: 12px; overflow: hidden; }
+.balloon { position: absolute; bottom: -80px; transform: translateX(-50%); border: none; width: 62px; height: 80px; border-radius: 50% 50% 45% 45%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color: white; cursor: pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.35); animation-name: balloon-float; animation-timing-function: linear; }
+.balloon.popped { transform: scale(0.9); opacity: 0.6; }
+@keyframes balloon-float { 0% { transform: translate(-50%, 30px) scale(1); opacity: 0 } 10% { opacity: 1 } 100% { transform: translate(-50%, -420px) scale(1); opacity: 1 } }
+
+
 /* Memory match board */
 .memory-board {
   display: grid;
