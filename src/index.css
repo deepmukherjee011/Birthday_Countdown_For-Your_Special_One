@@ -299,6 +299,19 @@ input:focus, textarea:focus {
   transform: none;
 }
 
+.preview-toggle {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(255,255,255,0.04);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  z-index: 120;
+}
+.preview-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.36); }
+
 @media (max-width: 640px) {
   .container {
     justify-content: flex-start;

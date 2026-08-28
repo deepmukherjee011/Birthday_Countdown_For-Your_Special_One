@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Starfield from './components/Starfield';
 import CountdownTimer from './components/CountdownTimer';
 import Celebration from './components/Celebration';
@@ -16,6 +16,20 @@ function App() {
   const [isCelebrating, setIsCelebrating] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
   const [showMiniGame, setShowMiniGame] = useState(true);
+  const [previewBirthday, setPreviewBirthday] = useState(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('previewBirthday') === '1') return true;
+        return localStorage.getItem('previewBirthday') === '1';
+      }
+    } catch (e) {}
+    return false;
+  });
+
+  useEffect(() => {
+    try { localStorage.setItem('previewBirthday', previewBirthday ? '1' : '0'); } catch (e) {}
+  }, [previewBirthday]);
   const handleCelebrate = useCallback(() => setIsCelebrating(true), []);
   const celebrationAge = config.targetYear
     ? config.targetYear - config.birthYear
@@ -46,7 +60,7 @@ function App() {
       <div className="site-background" style={backgroundStyle} aria-hidden="true" />
       <Starfield />
       {showMiniGame ? (
-        surpriseDate === '2026-08-29' ? (
+        (surpriseDate === '2026-08-29' || previewBirthday) ? (
           <HappyBirthdayGame
             shyari={shyari}
             song={song}
@@ -96,6 +110,15 @@ function App() {
         aria-label="Admin settings"
       >
         ✎
+      </button>
+
+      <button
+        type="button"
+        className="preview-toggle"
+        onClick={() => setPreviewBirthday((p) => !p)}
+        aria-label="Toggle birthday preview"
+      >
+        Preview BD
       </button>
 
       {showAdmin && (
