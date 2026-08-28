@@ -404,6 +404,15 @@ input:focus, textarea:focus {
 .balloon.popped { transform: scale(0.9); opacity: 0.6; }
 @keyframes balloon-float { 0% { transform: translate(-50%, 30px) scale(1); opacity: 0 } 10% { opacity: 1 } 100% { transform: translate(-50%, -420px) scale(1); opacity: 1 } }
 
+/* Apology Bouquet styles */
+.flower-arena { position: relative; width: 100%; height: 260px; margin-top: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius: 12px; overflow: hidden; }
+.flower { position: absolute; bottom: -80px; transform: translateX(-50%); border: none; width: 60px; height: 60px; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color: white; cursor: pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.35); animation-name: flower-float; animation-timing-function: linear; }
+.flower.collected { transform: scale(0.9); opacity: 0.6; }
+@keyframes flower-float { 0% { transform: translate(-50%, 30px) scale(1); opacity: 0 } 10% { opacity: 1 } 100% { transform: translate(-50%, -420px) scale(1); opacity: 1 } }
+.bouquet-list { margin-top: 12px; display:flex; flex-direction:column; gap:6px; max-height: 140px; overflow:auto; }
+.bouquet-line { background: rgba(255,255,255,0.04); padding: 0.6rem 0.9rem; border-radius: 8px; font-family: var(--font-handwritten); }
+
+
 
 /* Memory match board */
 .memory-board {

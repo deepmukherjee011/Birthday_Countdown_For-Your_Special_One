@@ -6,7 +6,7 @@ import PhotoGallery from './components/PhotoGallery';
 import ShayariCard from './components/ShayariCard';
 import AudioPlayer from './components/AudioPlayer';
 import AdminPanel from './components/AdminPanel';
-import MiniGame from './components/MiniGameToday';
+import MiniGame from './components/ApologyBouquet';
 import { useFirebaseData } from './hooks/useFirebaseData';
 import './index.css';
 
