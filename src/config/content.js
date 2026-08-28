@@ -52,7 +52,7 @@ export const SONG = {
 
 // Keep a reference to the previous song (moved to Day 5). The file should
 // exist at /public/music/day-5-song.mp3 (rename the previous file accordingly).
-export const PREVIOUS_SONG_SRC = '/music/1st day song.mp3';
+export const PREVIOUS_SONG_SRC = '/music/Happy Birthday Pihu.mp3';
 
 export const DAILY_SURPRISES = [
   {
@@ -148,7 +148,7 @@ export const DAILY_SURPRISES = [
     // Move the previous default song to Day 5 with a consistent filename.
     song: {
       src: PREVIOUS_SONG_SRC,
-      title: '1st day song',
+      title: 'Happy Birthday Pihu',
       subtitle: 'A special track for Day 5',
     },
   },
