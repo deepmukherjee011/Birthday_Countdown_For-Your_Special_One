@@ -31,14 +31,23 @@ const CountdownTimer = ({
 
   useEffect(() => {
     let celebrated = false;
+    let timer = null;
     const calculateTimeLeft = () => {
       const now = Date.now();
       const difference = targetBirthday.getTime() - now;
 
-      // Trigger celebration at the moment countdown reaches zero (within 1s)
-      if (!celebrated && Math.abs(difference) < 1000) {
-        celebrated = true;
-        onCelebrate();
+      // If we've reached or passed target exactly, stop the timer and celebrate.
+      if (difference <= 0) {
+        // Ensure UI shows all zeros
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, ms: 0 });
+        if (!celebrated) {
+          celebrated = true;
+          try { onCelebrate(); } catch (e) {}
+        }
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
         return;
       }
 
@@ -55,8 +64,8 @@ const CountdownTimer = ({
     };
 
     calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 50);
-    return () => clearInterval(timer);
+    timer = setInterval(calculateTimeLeft, 50);
+    return () => { if (timer) clearInterval(timer); };
   }, [targetBirthday, onCelebrate]);
 
   const pad = (num, length = 2) => String(num).padStart(length, '0');
