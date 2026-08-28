@@ -45,7 +45,7 @@ export const SHYARI = {
 export const SONG = {
   // Default song used for "today" and general playback. Replace the file
   // in `/public/music/` with the new song named `todays-song.mp3`.
-  src: '/music/1st day song.mp3',
+  src: '/music/Happy Birthday pihu.mp3',
   title: 'Today\'s Song',
   subtitle: 'A special song for today',
 };
@@ -148,7 +148,7 @@ export const DAILY_SURPRISES = [
     // Move the previous default song to Day 5 with a consistent filename.
     song: {
       src: PREVIOUS_SONG_SRC,
-      title: 'D1st day song',
+      title: '1st day song',
       subtitle: 'A special track for Day 5',
     },
   },
