@@ -13,18 +13,18 @@ export const BACKGROUND = {
 
 export const PHOTOS = [
   {
-    src: '/photos/pihu-4.jpeg',
+    src: '/photos/pihu-7.jpeg',
     caption: 'Us, always 💫',
     rotate: -3,
   },
   {
-    src: '/photos/pihu-5.jpeg',
-    caption: 'Tela',
+    src: '/photos/pihu-8.jpeg',
+    caption: 'Tera',
     rotate: 2,
   },
   {
-    src: '/photos/pihu-6.jpeg',
-    caption: 'Jhagiaa',
+    src: '/photos/pihu-9.jpeg',
+    caption: 'pechi',
     rotate: 1,
   },
 ];
@@ -45,7 +45,7 @@ export const SHYARI = {
 export const SONG = {
   // Default song used for "today" and general playback. Replace the file
   // in `/public/music/` with the new song named `todays-song.mp3`.
-  src: '/music/todays-song.mp3',
+  src: '/music/1st day song.mp3',
   title: 'Today\'s Song',
   subtitle: 'A special song for today',
 };
